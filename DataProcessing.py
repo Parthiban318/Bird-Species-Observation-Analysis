@@ -29,8 +29,8 @@ def load_and_clean_data():
 
 
     # Fix: Avoid inplace=True with chained assignment
-    combined_df['Temperature'] = combined_df['Temperature'].fillna(combined_df['Temperature'].mean())  # Fill missing temperature with mean
-    combined_df['Humidity'] = combined_df['Humidity'].fillna(combined_df['Humidity'].mean())  # Fill missing humidity with mean
+    combined_df['Temperature'] = combined_df['Temperature'].fillna(combined_df['Temperature'].mean())  
+    combined_df['Humidity'] = combined_df['Humidity'].fillna(combined_df['Humidity'].mean())  
 
     # Standardize data
     combined_df['Date'] = pd.to_datetime(combined_df['Date'])  # Convert to datetime
@@ -58,15 +58,15 @@ def load_and_clean_data():
     combined_df['Interval_Length'] = combined_df['Interval_Length'].apply(categorize_interval)
 
     # Handle 'Sky' and 'Wind' columns: Clean, categorize or map values if needed
-    combined_df['Sky'] = combined_df['Sky'].fillna('Unknown')  # Handle missing sky data
-    combined_df['Wind'] = combined_df['Wind'].fillna('Unknown')  # Handle missing wind data
+    combined_df['Sky'] = combined_df['Sky'].fillna('Unknown')  
+    combined_df['Wind'] = combined_df['Wind'].fillna('Unknown')  
 
     # Filter relevant columns
     columns_to_keep = [
         'Admin_Unit_Code', 'Location_Type', 'Interval_Length', 'ID_Method', 'Year', 'Month', 'Date', 
         'Scientific_Name', 'Common_Name', 'Temperature', 'Humidity', 'Distance', 'Flyover_Observed', 
         'Sex', 'PIF_Watchlist_Status', 'Regional_Stewardship_Status', 'Disturbance', 'Plot_Name', 
-        'Sky', 'Wind', 'Observer', 'Visit'  # Added Observer and Visit
+        'Sky', 'Wind', 'Observer', 'Visit'  
     ]
     combined_df = combined_df[columns_to_keep]
 
