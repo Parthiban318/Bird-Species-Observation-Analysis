@@ -8,8 +8,8 @@ def connect_to_postgres():
     try:
         conn = psycopg2.connect(
             dbname="bird_db",
-            user="postgres",  # Replace with actual username
-            password="pvasudwvan",  # Replace with actual password
+            user="postgres",  
+            password="pvasudwvan",  
             host="localhost",
             port="5432"
         )
@@ -22,7 +22,7 @@ def connect_to_postgres():
 def query_data_from_postgres(query):
     conn = connect_to_postgres()
     if conn is None:
-        return pd.DataFrame()  # Return empty DataFrame if connection fails
+        return pd.DataFrame()  
     
     try:
         df = pd.read_sql(query, conn)
@@ -44,7 +44,7 @@ def perform_eda(df):
     # 1. Temporal Analysis: Observations by Date
     st.subheader("1. Temporal Analysis Observations by Date")
     if "date" in df.columns:
-        df["date"] = pd.to_datetime(df["date"])  # Ensure date is in datetime format
+        df["date"] = pd.to_datetime(df["date"])  
         date_counts = df["date"].value_counts().sort_index()
         fig = px.line(x=date_counts.index, y=date_counts.values, labels={'x': 'Date', 'y': 'Number of Observations'})
         st.plotly_chart(fig)
